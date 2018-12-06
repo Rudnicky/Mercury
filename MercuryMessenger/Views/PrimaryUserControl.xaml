@@ -17,5 +17,11 @@
             FontSize="15"
             Foreground="{DynamicResource PrimaryUserControl.Foreground}"
             Text="{Binding Message}" />
+        <Button
+            Height="40"
+            Margin="5"
+            VerticalAlignment="Bottom"
+            Command="{Binding RegisterButtonClickedCommand}"
+            Content="{Binding ButtonContent}" />
     </Grid>
 </UserControl>
