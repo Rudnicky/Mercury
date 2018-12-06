@@ -1,0 +1,69 @@
+﻿<Window
+    x:Class="MercuryMessenger.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:MercuryMessenger.Views"
+    Title="MainWindow"
+    Width="600"
+    Height="450"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="CanResizeWithGrip"
+    WindowStyle="None"
+    MinWidth="500"
+    MinHeight="350"
+    mc:Ignorable="d">
+    <Border Margin="10" MouseDown="Border_MouseDown">
+        <Border.Effect>
+            <DropShadowEffect
+                BlurRadius="10"
+                Direction="270"
+                ShadowDepth="3"
+                Color="Black" />
+        </Border.Effect>
+        <Grid Background="{DynamicResource Application.Common.Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Top Panel -->
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Mercury Messenger" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Enter text to send:" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Send Message:" />
+                <TextBox x:Name="MessegeBox" Grid.Row="1" Grid.Column="1" Margin="0,2,8,2" 
+                         Text="{Binding MessageToSend, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="2" Grid.Column="1" Margin="0,2,8,2" 
+                        Content="Click me!" 
+                        Command="{Binding SendButtonClickedCommand}"
+                        CommandParameter="{Binding ElementName=MessegeBox, Path=Text}"
+                        IsEnabled="{Binding IsSendButtonEnabled}" />
+            </Grid>
+           
+            <!-- Bottom Panel -->
+            <TextBlock Grid.Row="1" Text="Primary Control Subscriber" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="Secondary Control Subscriber" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+            
+            <views:PrimaryUserControl Grid.Row="2" Grid.Column="0" Margin="10" />
+            <views:SecondaryUserControl Grid.Row="2" Grid.Column="1" Margin="10" />
+        </Grid>
+    </Border>
+</Window>
