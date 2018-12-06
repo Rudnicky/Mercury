@@ -1,9 +1,12 @@
-﻿using System.Windows.Input;
+﻿using MercuryMessenger.Interfaces;
+using System.Windows.Input;
 
 namespace MercuryMessenger.ViewModels
 {
     public class PrimaryViewModel : BaseViewModel
     {
+        private readonly ISubscriber _subscriber;
+
         private string _message;
         public string Message
         {
@@ -44,33 +47,25 @@ namespace MercuryMessenger.ViewModels
             }
         }
 
-        public PrimaryViewModel()
+        public PrimaryViewModel(ISubscriber subscriber)
         {
-            Subscribe();
+            this._subscriber = subscriber;
+            this._subscriber.Subscribe(this, MessageReceived);
+            this.ButtonContent = "Unregister";
         }
 
         private void RegisterButton_Clicked()
         {
             if (this.ButtonContent.Equals("Register"))
             {
-                Subscribe();
+                _subscriber.Subscribe(this, MessageReceived);
+                this.ButtonContent = "Unregister";
             }
             else
             {
-                Unsubscribe();
+                _subscriber.Unsubscribe(this);
+                this.ButtonContent = "Register";
             }
-        }
-
-        private void Subscribe()
-        {
-            MessegingCenter.MercuryMessenger.Messenger.Register<object>(this, MessageReceived);
-            this.ButtonContent = "Unregister";
-        }
-
-        private void Unsubscribe()
-        {
-            MessegingCenter.MercuryMessenger.Messenger.Unregister<object>(this);
-            this.ButtonContent = "Register";
         }
 
         private void MessageReceived(object obj)

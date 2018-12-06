@@ -62,8 +62,8 @@
             <TextBlock Grid.Row="1" Text="Primary Control Subscriber" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Secondary Control Subscriber" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
             
-            <views:PrimaryUserControl Grid.Row="2" Grid.Column="0" Margin="10" />
-            <views:SecondaryUserControl Grid.Row="2" Grid.Column="1" Margin="10" />
+            <views:PrimaryUserControl DataContext="{Binding PrimaryDataContext}" Grid.Row="2" Grid.Column="0" Margin="10" />
+            <views:SecondaryUserControl DataContext="{Binding SecondaryDataContext}" Grid.Row="2" Grid.Column="1" Margin="10" />
         </Grid>
     </Border>
 </Window>

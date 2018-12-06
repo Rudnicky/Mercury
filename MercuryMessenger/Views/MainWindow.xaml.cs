@@ -12,12 +12,6 @@ namespace MercuryMessenger
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MercuryMessenger.MessegingCenter.MercuryMessenger.Messenger.Send<object>("frajer!");
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

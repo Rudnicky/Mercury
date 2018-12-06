@@ -11,8 +11,6 @@ namespace MercuryMessenger.Views
         public PrimaryUserControl()
         {
             InitializeComponent();
-
-            this.DataContext = new PrimaryViewModel();
         }
     }
 }

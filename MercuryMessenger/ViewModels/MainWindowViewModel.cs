@@ -1,9 +1,12 @@
-﻿using System.Windows.Input;
+﻿using MercuryMessenger.Interfaces;
+using System.Windows.Input;
 
 namespace MercuryMessenger.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        private readonly ISubscriber _subscriber;
+
         private string _messageToSend;
         public string MessageToSend
         {
@@ -33,6 +36,34 @@ namespace MercuryMessenger.ViewModels
             }
         }
 
+        private PrimaryViewModel _primaryDataContext;
+        public PrimaryViewModel PrimaryDataContext
+        {
+            get { return _primaryDataContext; }
+            set
+            {
+                if (_primaryDataContext != value)
+                {
+                    _primaryDataContext = value;
+                    NotifyPropertyChanged(nameof(PrimaryDataContext));
+                }
+            }
+        }
+
+        private SecondaryViewModel _secondaryDataContext;
+        public SecondaryViewModel SecondaryDataContext
+        {
+            get { return _secondaryDataContext; }
+            set
+            {
+                if (_secondaryDataContext != value)
+                {
+                    _secondaryDataContext = value;
+                    NotifyPropertyChanged(nameof(SecondaryDataContext));
+                }
+            }
+        }
+
         private ICommand _sendButtonClickedCommand;
         public ICommand SendButtonClickedCommand
         {
@@ -45,9 +76,17 @@ namespace MercuryMessenger.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(ISubscriber subscriber)
         {
+            this._subscriber = subscriber;
 
+            SetupViewModelsForUserControls();
+        }
+
+        private void SetupViewModelsForUserControls()
+        {
+            this.PrimaryDataContext = new PrimaryViewModel(_subscriber);
+            this.SecondaryDataContext = new SecondaryViewModel(_subscriber);
         }
 
         private void SendButton_Clicked(object str)

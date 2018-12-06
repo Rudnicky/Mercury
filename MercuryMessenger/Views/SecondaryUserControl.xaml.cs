@@ -1,5 +1,4 @@
-﻿using MercuryMessenger.ViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace MercuryMessenger.Views
 {
@@ -11,8 +10,6 @@ namespace MercuryMessenger.Views
         public SecondaryUserControl()
         {
             InitializeComponent();
-
-            this.DataContext = new SecondaryViewModel();
         }
     }
 }
