@@ -75,5 +75,11 @@ namespace MercuryMessenger.ViewModels
                 Message = obj.ToString();
             }
         }
+
+        public void Dispose()
+        {
+            if (_subscriber != null)
+                _subscriber.Unsubscribe(this);
+        }
     }
 }

@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:MercuryMessenger.Views"
+    xmlns:b="clr-namespace:MercuryMessenger.Behaviors"
     Title="MainWindow"
     Width="600"
     Height="450"
@@ -14,6 +15,7 @@
     WindowStyle="None"
     MinWidth="500"
     MinHeight="350"
+    b:WindowBehavior.ClosingCommand="{Binding WindowClosingCommand}"
     mc:Ignorable="d">
     <Border Margin="10" MouseDown="Border_MouseDown">
         <Border.Effect>

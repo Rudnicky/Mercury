@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\WindowBehavior.cs" />
     <Compile Include="Interfaces\ISubscriber.cs" />
     <Compile Include="RelayCommand\EventArgs.cs" />
     <Compile Include="RelayCommand\EventRaiser.cs" />

@@ -1,4 +1,5 @@
 ﻿using MercuryMessenger.Interfaces;
+using System;
 using System.Windows.Input;
 
 namespace MercuryMessenger.ViewModels
@@ -76,6 +77,18 @@ namespace MercuryMessenger.ViewModels
             }
         }
 
+        private ICommand _windowClosingCommand;
+        public ICommand WindowClosingCommand
+        {
+            get
+            {
+                return _windowClosingCommand ?? (_windowClosingCommand = new RelayCommand.RelayCommand(x =>
+                {
+                    Window_Closing();
+                }));
+            }
+        }
+
         public MainWindowViewModel(ISubscriber subscriber)
         {
             this._subscriber = subscriber;
@@ -92,6 +105,15 @@ namespace MercuryMessenger.ViewModels
         private void SendButton_Clicked(object str)
         {
             MessegingCenter.MercuryMessenger.Messenger.Send(str.ToString());
+        }
+
+        private void Window_Closing()
+        {
+            if (PrimaryDataContext != null)
+                PrimaryDataContext.Dispose();
+
+            if (SecondaryDataContext != null)
+                SecondaryDataContext.Dispose();
         }
     }
 }
