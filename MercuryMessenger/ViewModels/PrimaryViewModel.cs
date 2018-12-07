@@ -5,6 +5,7 @@ namespace MercuryMessenger.ViewModels
 {
     public class PrimaryViewModel : BaseViewModel
     {
+        #region Fields & Properties
         private readonly ISubscriber _subscriber;
 
         private string _message;
@@ -20,7 +21,7 @@ namespace MercuryMessenger.ViewModels
                 }
             }
         }
-
+        
         private string _buttonContent;
         public string ButtonContent
         {
@@ -34,7 +35,9 @@ namespace MercuryMessenger.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Commands
         private ICommand _sendButtonClickedCommand;
         public ICommand RegisterButtonClickedCommand
         {
@@ -46,14 +49,18 @@ namespace MercuryMessenger.ViewModels
                 }));
             }
         }
+        #endregion
 
+        #region Ctor
         public PrimaryViewModel(ISubscriber subscriber)
         {
             this._subscriber = subscriber;
             this._subscriber.Subscribe(this, MessageReceived);
             this.ButtonContent = "Unregister";
         }
+        #endregion
 
+        #region Private Methods
         private void RegisterButton_Clicked()
         {
             if (this.ButtonContent.Equals("Register"))
@@ -75,11 +82,14 @@ namespace MercuryMessenger.ViewModels
                 Message = obj.ToString();
             }
         }
+        #endregion
 
+        #region Dispose
         public void Dispose()
         {
             if (_subscriber != null)
                 _subscriber.Unsubscribe(this);
         }
+        #endregion
     }
 }

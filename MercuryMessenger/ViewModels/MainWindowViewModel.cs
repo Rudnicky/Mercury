@@ -1,11 +1,11 @@
 ﻿using MercuryMessenger.Interfaces;
-using System;
 using System.Windows.Input;
 
 namespace MercuryMessenger.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        #region Private Fields & Properties
         private readonly ISubscriber _subscriber;
 
         private string _messageToSend;
@@ -64,7 +64,9 @@ namespace MercuryMessenger.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region Commands
         private ICommand _sendButtonClickedCommand;
         public ICommand SendButtonClickedCommand
         {
@@ -88,14 +90,18 @@ namespace MercuryMessenger.ViewModels
                 }));
             }
         }
+        #endregion
 
+        #region Ctor
         public MainWindowViewModel(ISubscriber subscriber)
         {
             this._subscriber = subscriber;
 
             SetupViewModelsForUserControls();
         }
+        #endregion
 
+        #region Private Methods
         private void SetupViewModelsForUserControls()
         {
             this.PrimaryDataContext = new PrimaryViewModel(_subscriber);
@@ -115,5 +121,6 @@ namespace MercuryMessenger.ViewModels
             if (SecondaryDataContext != null)
                 SecondaryDataContext.Dispose();
         }
+        #endregion
     }
 }
